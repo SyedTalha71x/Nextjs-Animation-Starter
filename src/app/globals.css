@@ -2,32 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color:
+    white;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color:
+    red;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+
+  transform-origin: bottom left;
+
+}
+
+.cursor,
+.cursor2 {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border: 2px solid blue;
+  transform: translate(-50%, -50%);
+  /* Blue border */
+  border-radius: 50%;
+  /* Circular shape */
+  background-color: blue;
+  /* Semi-transparent blue background */
+  pointer-events: none;
+  /* Cursor should not interact with elements */
+  z-index: 9999;
+  /* Ensure the cursor is on top of other elements */
+  transition: transform 0.3s ease;
+  /* Smooth transition */
+}
+
+.cursor2 {
+  width: 40px;
+  height: 40px;
+  border-color: blue;
+  background-color: transparent;
+}
+
+.cursor:hover,
+.cursor2:hover {
+  transform: scale(1.2);
+}
+
+.spin {
+  width: 100px;
+  height: 100px;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* transform: rotate(3deg); */
+  /* transform: rotate(0.3rad);/ */
+  /* transform: rotate(3grad); */
+  /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.glow {
+  transition: ease-in-out 0.4s;
+  animation: glow 2s infinite;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px 0 rgba(91, 91, 199, 0.5);
+
+  }
+
+  50% {
+    box-shadow: 0 0 20px 10px rgba(84, 84, 128, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 5px 0 rgba(73, 73, 133, 0.5);
+
   }
 }
